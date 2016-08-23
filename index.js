@@ -5,7 +5,6 @@
 const debug = require('debug')('express-urlrewrite');
 const toRegexp = require('path-to-regexp');
 const URL = require('url');
-const expressDebug = require('express-debug');
 
 /**
  * Expose `expose`.
@@ -19,7 +18,7 @@ module.exports = rewrite;
  * @api public
  */
 
-function rewrite(app, conf) {
+function rewrite() {
     const src = /\/(.*)(test)(.*)/;
     const dst = '/$1$3';
     var keys = [],
@@ -64,7 +63,6 @@ function rewrite(app, conf) {
             res.myRender('blank', locals, fn);
         }
 
-        expressDebug(app, conf || {});
         if (dst) next();
         else next('route');
     }
